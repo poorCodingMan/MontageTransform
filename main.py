@@ -16,7 +16,7 @@ parser.add_argument('--target_image', help='path to the target image')
 parser.add_argument('--dataset', help='dir in which the image datast is restored')
 parser.add_argument('--dir_src', default='./images/images_src/',
                     help='dir in which the generated component images to save. [default: ./images/images_src/]')
-parser.add_argument('--dir_log', default='./log/', help='Log dir [default: ./log/]')
+parser.add_argument('--dir_log', default='./logs/', help='Log dir [default: ./log/]')
 parser.add_argument('--dir_images', default='./images/',
                     help='dir in which the generated images to save [default: ./images]')
 parser.add_argument('--dataset_reshape', help='the shape the component images will be reshaped into')
@@ -44,11 +44,7 @@ is_resize_target = args.is_resize_target
 is_generate = args.is_generate
 dir_log = args.dir_log
 generate_save_name = args.generate_name
-
-if is_generate:
-	resize_shape_dataset = tuple(eval(args.dataset_reshape))
-else:
-	resize_shape_dataset = None
+resize_shape_dataset = tuple(eval(args.dataset_reshape))
 
 if is_resize_target:
 	resize_shape_target = tuple(eval(args.target_reshape))
