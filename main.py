@@ -14,7 +14,7 @@ from utils.MontageChanger import MonTageTransformer
 parser = argparse.ArgumentParser()
 parser.add_argument('--target_image', help='path to the target image')
 parser.add_argument('--dataset', help='dir in which the image datast is restored')
-parser.add_argument('--dir_src', default='./images/image_src/',
+parser.add_argument('--dir_src', default='./images/images_src/',
                     help='dir in which the generated component images to save. [default: ./images/images_src/]')
 parser.add_argument('--dir_log', default='./log/', help='Log dir [default: ./log/]')
 parser.add_argument('--dir_images', default='./images/',
@@ -34,8 +34,11 @@ parser.add_argument('--mixup_name', default='mixup.jpg',
 args = parser.parse_args()
 
 
+
 path_image_target = args.target_image
 dir_images = args.dir_images
+dir_images_src = args.dir_src
+dir_dataset = args.dataset
 is_mixup = args.is_mixup
 is_resize_target = args.is_resize_target
 is_generate = args.is_generate
@@ -43,13 +46,9 @@ dir_log = args.dir_log
 generate_save_name = args.generate_name
 
 if is_generate:
-	dir_dataset = args.dataset
 	resize_shape_dataset = tuple(eval(args.dataset_reshape))
-	dir_images_src = args.dir_src
 else:
-	dir_dataset = None
 	resize_shape_dataset = None
-	dir_images_src = None
 
 if is_resize_target:
 	resize_shape_target = tuple(eval(args.target_reshape))
@@ -62,7 +61,6 @@ if is_mixup:
 else:
 	mixup_weights = 0
 	mixup_save_name = None
-
 
 transformer = MonTageTransformer(path_image_target=path_image_target, resize_shape_target=resize_shape_target,
                                  resize_shape_dataset=resize_shape_dataset, dir_images=dir_images, dir_images_src=dir_images_src,
